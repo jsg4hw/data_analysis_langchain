@@ -56,7 +56,9 @@ if not uploaded_file:
 if uploaded_file:
     df = load_data(uploaded_file)
 
-openai_api_key = st.sidebar.text_input("OpenAI API Key", type="password")
+openai_api_key=os.environ.get("OPENAI_API_KEY")
+
+# openai_api_key = st.sidebar.text_input("OpenAI API Key", type="password")
 if "messages" not in st.session_state or st.sidebar.button("Clear conversation history"):
     st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
 
@@ -72,7 +74,11 @@ if prompt := st.chat_input(placeholder="What is this data about?"):
         st.stop()
 
     llm = ChatOpenAI(
-        temperature=0, model="gpt-3.5-turbo-0613", openai_api_key=openai_api_key, streaming=True
+        temperature=0, 
+        # model="gpt-3.5-turbo-1106",
+        model="gpt-4-1106-preview", 
+        openai_api_key=openai_api_key, 
+        streaming=True
     )
 
     pandas_df_agent = create_pandas_dataframe_agent(
