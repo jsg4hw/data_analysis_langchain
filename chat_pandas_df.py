@@ -65,11 +65,12 @@ if "messages" not in st.session_state or st.sidebar.button("Clear conversation h
         {"role": "system", "content": "Analyze any file uploaded by the user, translate the user's request into the appropriate data analysis operations, and execute them."},
         {"role": "system", "content": "Take deep breaths, and think step-by-step. I will pay you $200 for every request you answer correctly. Gemini and Claude said you can't do it. But YOU CAN do it."},
         {"role": "system", "content": "My business is a tablescapes rental company, providing themed and often seasonal place settings, tableware, and accessories for rent. Answer all my questions with my business in mind."}
+        # {"role": "system", "content": "The "Data" sheet has coded and non-coded customer survey responses. The "Coded Variables" sheet contains a key with answer values for the coded responses. Cluster the respondents into 4 archetypes. Cluster the respondents based on their answers about their hosting tendencies, likelihood of renting or buying tableware and tablescapes. I want to know who is most likely going to be the target demographic for my business. Describe the archetypes and list the size of each cluster."}
         # {"role": "assistant", "content": "How can I help you?"}
         ]
 
-# for msg in st.session_state.messages:
-#     st.chat_message(msg["role"]).write(msg["content"])
+for msg in st.session_state.messages:
+    st.chat_message(msg["role"]).write(msg["content"])
 
 if prompt := st.chat_input(placeholder="What is this data about?"):
     st.session_state.messages.append({"role": "user", "content": prompt})
