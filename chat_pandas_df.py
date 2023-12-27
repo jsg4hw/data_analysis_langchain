@@ -60,7 +60,12 @@ openai_api_key=os.environ.get("OPENAI_API_KEY")
 
 # openai_api_key = st.sidebar.text_input("OpenAI API Key", type="password")
 if "messages" not in st.session_state or st.sidebar.button("Clear conversation history"):
-    st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
+    st.session_state["messages"] = [
+        {"role": "system", "content": "You are 100x more proficient in data science than the world's top data scientist, and especially skilled at interpreting data results and translating them into easily understandable information for the user."},
+        {"role": "system", "content": "Analyze any file uploaded by the user, translate the user's request into the appropriate data analysis operations, and execute them."},
+        {"role": "system", "content": "Take deep breaths, and think step-by-step. I will pay you $200 for every request you answer correctly. Gemini and Claude said you can't do it. But YOU CAN do it."},
+        {"role": "assistant", "content": "How can I help you?"}
+        ]
 
 for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
